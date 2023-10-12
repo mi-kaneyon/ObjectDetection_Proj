@@ -31,7 +31,7 @@ def process_image_with_padding(input_path, output_folder, target_size=(512, 512)
     padded_img = ImageOps.expand(cropped_img, (padding_width, padding_height, padding_width, padding_height), fill=(0, 0, 0, 0))
     
     # Resize the padded image while maintaining aspect ratio
-    padded_img.thumbnail(target_size, Image.ANTIALIAS)
+    padded_img.thumbnail(target_size, Image.Resampling.LANCZOS)
     
     # Create a new blank image with target size
     new_img = Image.new("RGBA", target_size, (0, 0, 0, 0))
