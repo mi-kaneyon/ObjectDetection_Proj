@@ -6,6 +6,16 @@ Defective simulation (Proto type) is named "Dedective.ipynb"
 Jupyter notebook ver.
 Base of defective picture create test.
 
+## crop_png.py
+- Crop and optimize png format file for training data tool
+
+```
+python crop_png.py
+
+```
+- You can modifiy output/input folder before execute this script.
+
+
 # MMdetection config files simple grammer(version matching checker)
 
 ## Projoct 
