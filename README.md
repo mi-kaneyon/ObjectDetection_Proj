@@ -9,12 +9,20 @@ Base of defective picture create test.
 ## crop_png.py
 - Crop and optimize png format file for training data tool
 
+
 ```
 python crop_png.py
 
 ```
 - You can modifiy output/input folder before execute this script.
 
+```
+python resize json.py
+
+```
+
+## resize json.py
+- Resize image file time support tool, which is rescale to bbox/segemantation coordinates
 
 # MMdetection config files simple grammer(version matching checker)
 
