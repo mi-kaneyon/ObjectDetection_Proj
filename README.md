@@ -2,7 +2,15 @@
 My company unofficial repository
 
 # New!
-Defective simulation (Proto type) is named "Dedective.ipynb"
+- traing data padding tool named image_autonum.py
+- You need modify base directory and target file names
+- uplicates_per_image = 16000 should be changed by your target file numbers.
+```
+python image_autonum.py
+
+```  
+
+- Defective simulation (Proto type) is named "Dedective.ipynb"
 Jupyter notebook ver.
 Base of defective picture create test.
 
