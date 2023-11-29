@@ -2,6 +2,27 @@
 My company unofficial repository
 
 # New!
+## layercheck.py
+- pth file layer difference check or statuschecker
+
+```
+python layercheck.py 
+```
+
+``` 
+#Out puts ex ample Model's state_dict:
+conv1.weight 	 torch.Size([64, 3, 7, 7])
+bn1.weight 	 torch.Size([64])
+bn1.bias 	 torch.Size([64])
+bn1.running_mean 	 torch.Size([64])
+bn1.running_var 	 torch.Size([64])
+bn1.num_batches_tracked 	 torch.Size([])
+layer1.0.conv1.weight 	 torch.Size([64, 64, 3, 3])
+
+
+``` 
+
+## image_autonum.py
 - traing data padding tool named image_autonum.py
 - You need modify base directory and target file names
 - uplicates_per_image = 16000 should be changed by your target file numbers.
