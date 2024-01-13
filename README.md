@@ -2,6 +2,14 @@
 My company unofficial repository
 
 # New!
+## labeler.py
+- Detected moving target
+
+```
+python labeler.py
+```
+  
+
 ## layercheck.py
 - pth file layer difference check or statuschecker
 
