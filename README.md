@@ -1,7 +1,14 @@
 # ObjectDetection_Proj
 My company unofficial repository
+# New! (2nd Feb 2024)
 
-# New!
+## png_adjust.py
+- Optimizing transparent
+
+```
+python png_adjust.py
+
+
 ## labeler.py
 - Detected moving target
 
