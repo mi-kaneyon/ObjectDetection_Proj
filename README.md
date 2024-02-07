@@ -1,6 +1,14 @@
 # ObjectDetection_Proj
 My company unofficial repository
-# New! (2nd Feb 2024)
+# New! (7th Feb 2024)
+
+## json_idadvchk.py
+- coco format json file counter from json file
+
+```
+python json_idadvchk.py
+```
+
 
 ## png_adjust.py
 - Optimizing transparent
@@ -8,7 +16,7 @@ My company unofficial repository
 ```
 python png_adjust.py
 
-
+```
 ## labeler.py
 - Detected moving target
 
