@@ -27,9 +27,12 @@ We PS 前
 ## on the realtime display ver
 
 ```
-
+python J_ocr.py
 
 ```
+### example
+![text image](sample.png)
+
 
 
 
