@@ -1,9 +1,16 @@
 # ObjectDetection_Proj
 My company unofficial repository
-# New! (11th Feb 2024)
+# New! (13th Feb 2024)
 
 ## Real time OCR 
 https://github.com/mi-kaneyon/ObjectDetection_Proj/tree/main/realtimeOCR
+
+## json_idadvchk.py
+- trained output which is pth file, checker.
+
+```
+python pth_summary.py /path/to/model.pth
+```
 
 ## json_idadvchk.py
 - coco format json file counter from json file
