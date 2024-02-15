@@ -5,7 +5,7 @@ My company unofficial repository
 ## Real time OCR 
 https://github.com/mi-kaneyon/ObjectDetection_Proj/tree/main/realtimeOCR
 
-## json_idadvchk.py
+## pth_summary.py
 - trained output which is pth file, checker.
 
 ```
