@@ -11,6 +11,12 @@ My company unofficial repository
 ```
 python int_screener.py
 ```
+- background black and show result Japanese version
+
+```
+python screener.py
+```
+
 
 
 ## Real time OCR 
