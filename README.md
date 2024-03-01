@@ -1,6 +1,17 @@
 # ObjectDetection_Proj
 My company unofficial repository
-# New! (13th Feb 2024)
+
+
+
+# New! (2nd Mar 2024)
+
+## Manual LCD inspection trainer
+- appeared dead dot randamly, and inspecter should try 10 time challage
+
+```
+python int_screener.py
+```
+
 
 ## Real time OCR 
 https://github.com/mi-kaneyon/ObjectDetection_Proj/tree/main/realtimeOCR
