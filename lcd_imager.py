@@ -1,105 +1,61 @@
+import pygame
+import random
+import sys
+from pygame.locals import *
 
-from PIL import Image
-import json
-import os
-import numpy as np
-from datetime import datetime
+# Initialization
+pygame.init()
+infoObject = pygame.display.Info()
+screen_width, screen_height = infoObject.current_w, infoObject.current_h
+screen = pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREEN)
+pygame.display.set_caption('LCD Dead Pixel Simulation Test')
 
-# パラメータ設定
-image_resolution = (640, 480)
-background_colors = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0), "green": (0, 255, 0), "blue": (0, 0, 255), "yellow": (255, 255, 0)}
-defect_types = ["deaddot", "brightdot", "discoloration"]
-output_dir = "lcd_images"
-os.makedirs(output_dir, exist_ok=True)
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
+COLORS = [BLACK, RED, GREEN, BLUE, YELLOW]  # Exclude WHITE for the dot color
 
-# COCO JSONファイルの初期化
-coco_json = {
-    "info": {
-        "year": datetime.now().year,
-        "version": "1.0",
-        "description": "LCD Image Dataset",
-        "contributor": "",
-        "url": "",
-        "date_created": datetime.now().isoformat()
-    },
-    "images": [],
-    "annotations": [],
-    "licenses": [],
-    "categories": [
-        {"id": 0, "name": "ok"},
-        {"id": 1, "name": "deaddot"},
-        {"id": 2, "name": "brightdot"},
-        {"id": 3, "name": "discoloration"}
-    ]
-}
+def draw_random_dot():
+    x = random.randint(0, screen_width-1)
+    y = random.randint(0, screen_height-1)
+    color = random.choice(COLORS)
+    screen.fill(WHITE)
+    pygame.draw.circle(screen, color, (x, y), 1)
+    pygame.display.flip()
+    return x, y, color
 
-def create_defect(image, defect_type):
-    x, y = np.random.randint(0, image.width), np.random.randint(0, image.height)
-    if defect_type == "deaddot":
-        if image.getpixel((x, y)) == background_colors["white"]:
-            image.putpixel((x, y), (0, 0, 0))
-    elif defect_type == "brightdot":
-        if image.getpixel((x, y)) != background_colors["white"]:
-            image.putpixel((x, y), (255, 255, 255))
-    elif defect_type == "discoloration":
-        current_color = image.getpixel((x, y))
-        new_color = tuple(np.random.randint(0, 256, size=3))
-        if current_color != new_color:
-            image.putpixel((x, y), new_color)
-    return x, y
+def main():
+    correct_answers = 0
+    try:
+        for i in range(10):
+            correct_x, correct_y, dot_color = draw_random_dot()
+            running = True
+            start_ticks = pygame.time.get_ticks()  # Start timer
+            while running:
+                for event in pygame.event.get():
+                    if event.type == QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    if event.type == MOUSEBUTTONDOWN and event.button == 1:
+                        x, y = event.pos
+                        # Check if the click is within 4 pixels of the correct dot
+                        if abs(x - correct_x) <= 4 and abs(y - correct_y) <= 4:
+                            print(f"Correct! Coordinates: ({correct_x}, {correct_y})")
+                            correct_answers += 1
+                        else:
+                            print(f"Incorrect. Correct coordinates: ({correct_x}, {correct_y})")
+                        running = False
+                seconds = (pygame.time.get_ticks() - start_ticks) / 1000
+                if seconds > 15:  # 15 seconds passed
+                    print(f"Time's up. Correct coordinates: ({correct_x}, {correct_y})")
+                    running = False
+    finally:
+        pygame.quit()
+        print(f"Test completed. Correct answers: {correct_answers}/10")
 
-def create_image_and_annotation(color_name, color, img_id, defect_type=None):
-    # 不良画像の場合、ファイル名に不良タイプを含める
-    prefix = defect_type if defect_type else color_name
-    file_name = f"{prefix}_{datetime.now().strftime('%Y%m%d%H%M%S%f')}.png"
-    image_path = os.path.join(output_dir, file_name)
-    
-    if not defect_type:
-        # 良品画像の生成
-        image = Image.new("RGB", image_resolution, color)
-        image.save(image_path)
-    else:
-        # 不良画像の生成
-        image = Image.new("RGB", image_resolution, color)
-        x, y = create_defect(image, defect_type)
-        image.save(image_path)
-        annotation = {
-            "id": len(coco_json["annotations"]) + 1,
-            "image_id": img_id,
-            "category_id": defect_types.index(defect_type) + 1,
-            "segmentation": [],
-            "area": 1,
-            "bbox": [x, y, 1, 1],
-            "iscrowd": 0
-        }
-        coco_json["annotations"].append(annotation)
-
-    coco_json["images"].append({
-        "id": img_id,
-        "width": image_resolution[0],
-        "height": image_resolution[1],
-        "file_name": file_name,
-        "license": 0,
-        "flickr_url": "",
-        "coco_url": "",
-        "date_captured": datetime.now().isoformat()
-    })
-
-# 各背景色ごとに全てのピクセル位置で不良を生成
-img_id = 1
-for color_name, color in background_colors.items():
-    for y in range(image_resolution[1]):
-        for x in range(image_resolution[0]):
-            # 良品画像の生成
-            create_image_and_annotation(color_name, color, img_id)
-            img_id += 1
-
-            # 不良画像の生成
-            for defect_type in defect_types:
-                create_image_and_annotation(color_name, color, img_id, defect_type)
-                img_id += 1
-
-# JSONファイルの保存
-json_path = os.path.join(output_dir, "coco_corrected.json")
-with open(json_path, "w") as json_file:
-    json.dump(coco_json, json_file, indent=4)
+if __name__ == "__main__":
+    main()
