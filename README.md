@@ -9,7 +9,7 @@ python ssd_train_v1.py
 ```
 
 
-# New! (2nd Mar 2024)
+# New! (3rd Mar 2024)
 
 ## Manual LCD inspection trainer
 - appeared dead dot randamly, and inspecter should try 10 time challage
