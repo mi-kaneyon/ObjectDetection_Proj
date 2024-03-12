@@ -2,6 +2,12 @@
 My company unofficial repository
 
 
+## Resnet data learning for object detection
+- general object detection script
+```
+python ssd_train_v1.py
+```
+
 
 # New! (2nd Mar 2024)
 
