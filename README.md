@@ -19,9 +19,16 @@ python ssd_train_v1.py
 ```
 python lcd_tester.py
 ```
+## Requirement
+
+```
+pip install pygame
+
+```
 
 
-## Auto LCD inspection trainer
+
+# Auto LCD inspection trainer
 - appeared dead dot randamly, and inspecter should try 10 time challage
 - add random dead size edtion
 
