@@ -9,9 +9,19 @@ python ssd_train_v1.py
 ```
 
 
-# New! (3th Apr 2024)
+# New! (23th Oct 2024)
+# Manual control LCD dead pixel simulator
 
-## Manual LCD inspection trainer
+- all instruction of this tool is displayed on the screen
+- Whenever you want to check, you can show and hide.
+- In this code Japanese comment 
+
+```
+python lcd_tester.py
+```
+
+
+## Auto LCD inspection trainer
 - appeared dead dot randamly, and inspecter should try 10 time challage
 - add random dead size edtion
 
